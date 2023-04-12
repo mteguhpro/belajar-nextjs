@@ -15,7 +15,8 @@ export default function TableInstant({
     pageSize,
     pageCount,
     setPagination,
-    isFetching
+    isLoading,
+    isValidating,
 }) {
     const pagination = useMemo(
         () => ({
@@ -40,9 +41,10 @@ export default function TableInstant({
     })
     
 
-    return (
+    return (<>
+        {isLoading ? <div>Loading...</div> : (isValidating ? <div>Validating...</div> : null)}
         <div className="overflow-x-auto">
-            <table className="table w-full">
+            <table className="table table-zebra table-compact border-collapse w-full">
                 <thead>
                     {table.getHeaderGroups().map(headerGroup => (
                         <tr key={headerGroup.id}>
@@ -67,9 +69,9 @@ export default function TableInstant({
                     {table.getRowModel().rows.map(row => {
                         return (
                             <tr key={row.id}>
-                                {row.getVisibleCells().map(cell => {
+                                {row.getVisibleCells().map((cell,i) => {
                                     return (
-                                        <td key={cell.id}>
+                                        <td key={cell.id} className={ i==0 ?"border-slate-200":"border-l border-slate-200"}>
                                             {flexRender(
                                                 cell.column.columnDef.cell,
                                                 cell.getContext()
@@ -82,45 +84,49 @@ export default function TableInstant({
                     })}
                 </tbody>
             </table>
-            <div className="h-2" />
-            <div className="flex items-center gap-2">
+        </div>
+        <div className="h-2" />
+        <div className="flex flex-row flex-wrap">
+            <div className="basis-full md:basis-1/3">
                 <button
-                    className="btn btn-sm"
+                    className="btn btn-sm mx-1"
                     onClick={() => table.setPageIndex(0)}
                     disabled={!table.getCanPreviousPage()}
                 >
                     {'<<'}
                 </button>
                 <button
-                    className="btn btn-sm"
+                    className="btn btn-sm mx-1"
                     onClick={() => table.previousPage()}
                     disabled={!table.getCanPreviousPage()}
                 >
                     {'<'}
                 </button>
                 <button
-                    className="btn btn-sm"
+                    className="btn btn-sm mx-1"
                     onClick={() => table.nextPage()}
                     disabled={!table.getCanNextPage()}
                 >
                     {'>'}
                 </button>
                 <button
-                    className="btn btn-sm"
+                    className="btn btn-sm mx-1"
                     onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                     disabled={!table.getCanNextPage()}
                 >
                     {'>>'}
                 </button>
-                <span className="flex items-center gap-1">
-                    <div>Page</div>
+            </div>
+            <div className="basis-full md:basis-2/3">
+                <span className="">
+                    Page&nbsp;
                     <strong>
                         {table.getState().pagination.pageIndex + 1} of{' '}
                         {table.getPageCount()}
                     </strong>
                 </span>
-                <span className="flex items-center gap-1">
-                    | Go to page:
+                <span className="">
+                    &nbsp;| Go to page:
                     <input
                         type="number"
                         defaultValue={table.getState().pagination.pageIndex + 1}
@@ -128,7 +134,7 @@ export default function TableInstant({
                             const page = e.target.value ? Number(e.target.value) - 1 : 0
                             table.setPageIndex(page)
                         }}
-                        className="input input-bordered input-sm w-16"
+                        className="input input-bordered input-sm w-16 mx-1"
                     />
                 </span>
                 <select
@@ -136,7 +142,7 @@ export default function TableInstant({
                     onChange={e => {
                         table.setPageSize(Number(e.target.value))
                     }}
-                    className="select select-bordered select-sm"
+                    className="select select-bordered select-sm mx-1"
                 >
                     {[10, 20, 30, 40, 50].map(pageSize => (
                         <option key={pageSize} value={pageSize}>
@@ -144,10 +150,10 @@ export default function TableInstant({
                         </option>
                     ))}
                 </select>
-                {isFetching ? <div>Loading...</div> : null}
             </div>
-            {/* <div>{table.getRowModel().rows.length} Rows</div> */}
-            {/* <pre>{JSON.stringify(pagination, null, 2)}</pre> */}
         </div>
-    )
+        {isLoading ? <div>Loading...</div> : (isValidating ? <div>Validating...</div> : null)}
+        {/* <div>{table.getRowModel().rows.length} Rows</div> */}
+        {/* <pre>{JSON.stringify(pagination, null, 2)}</pre> */}
+    </>)
 }

@@ -36,7 +36,7 @@ function ListData() {
 
     const fetcher = (url) => axiosInstance.get(url).then(res => res.data)
     const address = 'users?limit='+pageSize+'&skip='+(pageIndex*pageSize);
-    const { data:dataGet, error, isLoading } = useSWR(address, fetcher);
+    const { data:dataGet, error, isLoading, isValidating } = useSWR(address, fetcher);
 
     if (error){
         return <p>Loading failed...</p>;
@@ -48,7 +48,8 @@ function ListData() {
         data={dataList} 
         columns={columns}
         setPagination={setPagination}
-        isFetching={isLoading}
+        isLoading={isLoading}
+        isValidating={isValidating}
         pageCount={dataGet?.total && Math.ceil(dataGet.total / pageSize)}
         pageSize = {pageSize}
         pageIndex = {pageIndex}
