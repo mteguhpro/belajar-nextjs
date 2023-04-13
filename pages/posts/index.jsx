@@ -32,6 +32,7 @@ function ListData() {
         pageIndex: 0,
         pageSize: 10,
     })
+    const [sorting, setSorting] = useState([])
 
     const fetcher = (url) => axiosInstance.get(url).then(res => res.data)
     let address = 'posts';
@@ -66,6 +67,8 @@ function ListData() {
             data={dataList} 
             columns={columns}
             setPagination={setPagination}
+            sorting={sorting}
+            setSorting={setSorting}
             isLoading={isLoading}
             isValidating={isValidating}
             pageCount={dataGet?.total && Math.ceil(dataGet.total / pageSize)}

@@ -1,4 +1,4 @@
-import {useMemo} from 'react'
+import { useMemo } from 'react'
 
 import {
     useReactTable,
@@ -15,6 +15,8 @@ export default function TableInstant({
     pageSize,
     pageCount,
     setPagination,
+    sorting,
+    setSorting,
     isLoading,
     isValidating,
 }) {
@@ -32,14 +34,16 @@ export default function TableInstant({
         pageCount: pageCount ?? -1,
         state: {
             pagination,
+            sorting,
         },
+        onSortingChange: setSorting,
         onPaginationChange: setPagination,
         getCoreRowModel: getCoreRowModel(),
         manualPagination: true,
         // getPaginationRowModel: getPaginationRowModel(), // If only doing manual pagination, you don't need this
         debugTable: true,
     })
-    
+
 
     return (<>
         {isLoading ? <div>Loading...</div> : (isValidating ? <div>Validating...</div> : null)}
@@ -52,11 +56,22 @@ export default function TableInstant({
                                 return (
                                     <th key={header.id} colSpan={header.colSpan}>
                                         {header.isPlaceholder ? null : (
-                                            <div>
+                                            <div
+                                                {...{
+                                                    className: header.column.getCanSort()
+                                                        ? 'cursor-pointer select-none'
+                                                        : '',
+                                                    onClick: header.column.getToggleSortingHandler(),
+                                                }}
+                                            >
                                                 {flexRender(
                                                     header.column.columnDef.header,
                                                     header.getContext()
                                                 )}
+                                                {{
+                                                    asc: ' ↓',
+                                                    desc: ' ↑',
+                                                }[header.column.getIsSorted()] ?? null}
                                             </div>
                                         )}
                                     </th>
@@ -69,9 +84,9 @@ export default function TableInstant({
                     {table.getRowModel().rows.map(row => {
                         return (
                             <tr key={row.id}>
-                                {row.getVisibleCells().map((cell,i) => {
+                                {row.getVisibleCells().map((cell, i) => {
                                     return (
-                                        <td key={cell.id} className={ i==0 ?"border-slate-200":"border-l border-slate-200"}>
+                                        <td key={cell.id} className={i == 0 ? "border-slate-200" : "border-l border-slate-200"}>
                                             {flexRender(
                                                 cell.column.columnDef.cell,
                                                 cell.getContext()
@@ -155,5 +170,6 @@ export default function TableInstant({
         {isLoading ? <div>Loading...</div> : (isValidating ? <div>Validating...</div> : null)}
         {/* <div>{table.getRowModel().rows.length} Rows</div> */}
         {/* <pre>{JSON.stringify(pagination, null, 2)}</pre> */}
+        {/* <pre>{JSON.stringify(sorting, null, 2)}</pre> */}
     </>)
 }

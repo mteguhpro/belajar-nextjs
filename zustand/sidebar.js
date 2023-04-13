@@ -6,7 +6,7 @@ const useSidebarStore = create(
         (set) => ({
             isActive: false,
             toggle: () => set((state) => ({ isActive: !state.isActive })),
-            startData: (data) => set(() => ({ isActive: data })),
+            setActive: (bool) => set(() => ({ isActive: bool })),
         })
     )
 )
