@@ -2,7 +2,7 @@ import Link from "next/link";
 import { createColumnHelper } from '@tanstack/react-table'
 import { useMemo, useState } from 'react'
 import useSWR from 'swr'
-import axiosInstance from '../../axios/instance';
+import instanceAxios from '../../axios/instance';
 import Layout from '../../components/layout';
 import TableInstant from '../../components/TableInstant';
 import { useForm } from "react-hook-form";
@@ -34,7 +34,7 @@ function ListData() {
     })
     const [sorting, setSorting] = useState([])
 
-    const fetcher = (url) => axiosInstance.get(url).then(res => res.data)
+    const fetcher = (url) => instanceAxios.get(url).then(res => res.data)
     let address = 'posts';
     if(search){
         address += '/search?q='+search+'&limit='+pageSize+'&skip='+(pageIndex*pageSize);

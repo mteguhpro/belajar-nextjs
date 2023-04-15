@@ -1,5 +1,5 @@
 import Layout from "../../components/layout"
-import axiosInstance from "../../axios/instance"
+import instanceAxios from "../../axios/instance"
 import useSWRMutation from 'swr/mutation'
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
@@ -8,7 +8,7 @@ export default function Insert() {
     const router = useRouter()
     //POST
     async function sendReq(url, data){
-        const post = await axiosInstance.post(url, data?.arg).then(res => res.data)
+        const post = await instanceAxios.post(url, data?.arg).then(res => res.data)
             .catch(function(err){
                 alert('Error '+ err.response.status + ' | ' +err.response.data.message)
             })

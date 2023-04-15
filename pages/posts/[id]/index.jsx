@@ -1,4 +1,4 @@
-import axiosInstance from "../../../axios/instance";
+import instanceAxios from "../../../axios/instance";
 import { useRouter } from "next/router"
 import Layout from "../../../components/layout"
 import useSWR from 'swr'
@@ -20,7 +20,7 @@ function LoadData(){
 
     //DELETE
     async function sendReq(url){
-        const result = await axiosInstance.delete(url).then(res => res.data)
+        const result = await instanceAxios.delete(url).then(res => res.data)
             .catch(function(err){
                 alert('Error '+ err.response.status + ' | ' +err.response.data.message)
             })
@@ -35,7 +35,7 @@ function LoadData(){
     //END DELETE
 
     //GET
-    const fetcher = (url) => axiosInstance.get(url).then(res => res.data)
+    const fetcher = (url) => instanceAxios.get(url).then(res => res.data)
     const { data, error } = useSWR(address, fetcher);
 
     if (error){

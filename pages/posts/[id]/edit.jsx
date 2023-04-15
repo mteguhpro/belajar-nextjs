@@ -1,5 +1,5 @@
 import Layout from "../../../components/layout";
-import axiosInstance from "../../../axios/instance";
+import instanceAxios from "../../../axios/instance";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router"
 import useSWRMutation from 'swr/mutation'
@@ -11,7 +11,7 @@ export default function Edit(){
 
     //PUT
     async function sendReq(url, data){
-        const post = await axiosInstance.put(url, data?.arg).then(res => res.data)
+        const post = await instanceAxios.put(url, data?.arg).then(res => res.data)
         console.log(url, data)
         if(post?.title){
             alert('sukses mengupdate '+post?.title)
@@ -27,7 +27,7 @@ export default function Edit(){
     //END PUT
     
     //GET
-    const fetcher = (url) => axiosInstance.get(url).then(res => res.data)
+    const fetcher = (url) => instanceAxios.get(url).then(res => res.data)
     const address = 'posts/' + id;
     const { data, error } = useSWR(address, fetcher);
     if (error){

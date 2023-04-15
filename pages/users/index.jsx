@@ -1,7 +1,7 @@
 import { createColumnHelper } from '@tanstack/react-table'
 import { useMemo, useState } from 'react'
 import useSWR from 'swr'
-import axiosInstance from '../../axios/instance';
+import instanceAxios from '../../axios/instance';
 import Layout from '../../components/layout';
 import TableInstant from '../../components/TableInstant';
 
@@ -34,7 +34,7 @@ function ListData() {
         pageSize: 10,
     })
 
-    const fetcher = (url) => axiosInstance.get(url).then(res => res.data)
+    const fetcher = (url) => instanceAxios.get(url).then(res => res.data)
     const address = 'users?limit='+pageSize+'&skip='+(pageIndex*pageSize);
     const { data:dataGet, error, isLoading, isValidating } = useSWR(address, fetcher);
 
