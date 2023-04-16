@@ -85,12 +85,20 @@ export default function TableInstant({
                         return (
                             <tr key={row.id}>
                                 {row.getVisibleCells().map((cell, i) => {
+                                    const isi = flexRender(
+                                        cell.column.columnDef.cell,
+                                        cell.getContext()
+                                    )
+                                    if(i == 0){
+                                        return (
+                                            <th key={cell.id} className="border-slate-200">
+                                                {isi}
+                                            </th>
+                                        )
+                                    }
                                     return (
-                                        <td key={cell.id} className={i == 0 ? "border-slate-200" : "border-l border-slate-200"}>
-                                            {flexRender(
-                                                cell.column.columnDef.cell,
-                                                cell.getContext()
-                                            )}
+                                        <td key={cell.id} className="border-l border-slate-200">
+                                            {isi}
                                         </td>
                                     )
                                 })}
