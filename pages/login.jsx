@@ -3,6 +3,7 @@ import useSWRMutation from 'swr/mutation'
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { toast } from 'react-toastify';
 
 export default function Login() {
     const router = useRouter()
@@ -16,14 +17,14 @@ export default function Login() {
     async function sendReq(url, data){
         const post = await instanceAxios.post(url, data?.arg).then(res => res.data)
             .catch(function(err){
-                alert('Error '+ err.response.status + ' | ' +err.response.data.message)
+                toast.error('Error '+ err.response.status + ' | ' +err.response.data.message)
             })
         if(post?.token){
             window.localStorage.setItem("jwtToken", post.token)
-            alert('Selamat datang, '+post?.username)
+            toast.success('Selamat datang, '+post?.username)
             router.push('/')
         }else{
-            alert('Gagal Login. Token tidak ditemukan.')
+            toast.error('Gagal Login. Token tidak ditemukan.')
         }
     }
     const address = 'auth/login';

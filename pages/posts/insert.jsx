@@ -3,6 +3,7 @@ import instanceAxios from "../../axios/instance"
 import useSWRMutation from 'swr/mutation'
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 export default function Insert() {
     const router = useRouter()
@@ -10,11 +11,11 @@ export default function Insert() {
     async function sendReq(url, data){
         const post = await instanceAxios.post(url, data?.arg).then(res => res.data)
             .catch(function(err){
-                alert('Error '+ err.response.status + ' | ' +err.response.data.message)
+                toast.error('Error '+ err.response.status + ' | ' +err.response.data.message)
             })
         console.log(url, data)
         if(post?.title){
-            alert(post?.id + ' - Sukses insert '+post?.title)
+            toast.success(post?.id + ' - Sukses insert '+post?.title)
             router.push('/posts')
         }
     }

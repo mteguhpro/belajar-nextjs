@@ -4,6 +4,7 @@ import Layout from "../../../components/layout"
 import useSWR from 'swr'
 import useSWRMutation from 'swr/mutation'
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 export default function Post() {
     return (
@@ -22,11 +23,11 @@ function LoadData(){
     async function sendReq(url){
         const result = await instanceAxios.delete(url).then(res => res.data)
             .catch(function(err){
-                alert('Error '+ err.response.status + ' | ' +err.response.data.message)
+                toast.error('Error '+ err.response.status + ' | ' +err.response.data.message)
             })
         console.log(url)
         if(result?.title){
-            alert(result?.id + ' - Sukses Delete '+result?.title)
+            toast.success(result?.id + ' - Sukses Delete '+result?.title)
             router.push('/posts')
         }
     }

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/router"
 import useSWRMutation from 'swr/mutation'
 import useSWR from 'swr'
+import { toast } from "react-toastify";
 
 export default function Edit(){
     const router = useRouter()
@@ -14,7 +15,7 @@ export default function Edit(){
         const post = await instanceAxios.put(url, data?.arg).then(res => res.data)
         console.log(url, data)
         if(post?.title){
-            alert('sukses mengupdate '+post?.title)
+            toast.success('sukses mengupdate '+post?.title)
             router.push('/posts/'+id)
         }
     }
