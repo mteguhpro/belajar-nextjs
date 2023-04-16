@@ -35,7 +35,7 @@ function ListData() {
     })
 
     const fetcher = (url) => instanceAxios.get(url).then(res => res.data)
-    const address = 'users?limit='+pageSize+'&skip='+(pageIndex*pageSize);
+    const address = 'auth/users?limit='+pageSize+'&skip='+(pageIndex*pageSize);
     const { data:dataGet, error, isLoading, isValidating } = useSWR(address, fetcher);
 
     if (error){

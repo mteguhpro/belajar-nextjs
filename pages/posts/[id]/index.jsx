@@ -16,7 +16,7 @@ export default function Post() {
 function LoadData(){
     const router = useRouter()
     const { id } = router.query
-    const address = 'posts/' + id;
+    const address = 'auth/posts/' + id;
 
     //DELETE
     async function sendReq(url){

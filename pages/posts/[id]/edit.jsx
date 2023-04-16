@@ -18,7 +18,7 @@ export default function Edit(){
             router.push('/posts/'+id)
         }
     }
-    const urlPut = 'posts/'+id;
+    const urlPut = 'auth/posts/'+id;
     const { trigger, isMutating } = useSWRMutation(urlPut, sendReq)
     
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -28,7 +28,7 @@ export default function Edit(){
     
     //GET
     const fetcher = (url) => instanceAxios.get(url).then(res => res.data)
-    const address = 'posts/' + id;
+    const address = 'auth/posts/' + id;
     const { data, error } = useSWR(address, fetcher);
     if (error){
         return <p>Loading failed...</p>;

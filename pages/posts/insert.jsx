@@ -18,7 +18,7 @@ export default function Insert() {
             router.push('/posts')
         }
     }
-    const address = 'posts/add';
+    const address = 'auth/posts/add';
     const { trigger, isMutating } = useSWRMutation(address, sendReq)
     
     const { register, handleSubmit, formState: { errors } } = useForm();

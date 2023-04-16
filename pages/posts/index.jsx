@@ -35,7 +35,7 @@ function ListData() {
     const [sorting, setSorting] = useState([])
 
     const fetcher = (url) => instanceAxios.get(url).then(res => res.data)
-    let address = 'posts';
+    let address = 'auth/posts';
     if(search){
         address += '/search?q='+search+'&limit='+pageSize+'&skip='+(pageIndex*pageSize);
     }else{

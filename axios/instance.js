@@ -23,7 +23,7 @@ instanceAxios.interceptors.response.use(function (response) {
     // Do something with response data
     return response;
 }, function (error) {
-    if (error.response.status === 401) {
+    if (error.response.status === 403) {
         window.localStorage.removeItem("jwtToken");
         window.location.href = '/login' //BELUM MENEMUKAN ALTERNATIF SELAIN window.location. 
     }
