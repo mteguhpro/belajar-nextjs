@@ -9,14 +9,15 @@ import { useForm } from "react-hook-form";
 
 export default function Posts() {
     return (
-        <Layout>
+        <>
             <div className="p-2">
                 <Link href="/posts/insert" className="btn btn-sm">New Post</Link>
             </div>
             <ListData/>
-        </Layout>
+        </>
     )
 }
+Posts.layout = Layout
 
 function ListData() {
     const [search, setSearch] = useState('')

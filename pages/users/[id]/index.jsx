@@ -5,11 +5,12 @@ import Layout from '../../../components/layout';
 
 export default function Detail() {
     return (
-        <Layout>
+        <>
             <LoadData />
-        </Layout>
+        </>
     )
 }
+Detail.layout = Layout
 
 function LoadData() {
     const router = useRouter()

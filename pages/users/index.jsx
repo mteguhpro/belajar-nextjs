@@ -8,11 +8,12 @@ import Link from "next/link";
 
 export default function Users(){
     return (
-        <Layout>
+        <>
             <ListData/>
-        </Layout>
+        </>
     )
 }
+Users.layout = Layout
 
 function ListData() {
     const columnHelper = createColumnHelper()

@@ -28,7 +28,7 @@ export default function Insert() {
     //END POST
 
     return (
-        <Layout>
+        <>
             <h1 className="text-2xl font-bold leading-7 text-gray-900">Insert Post Data</h1>
 
             <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xs">
@@ -59,6 +59,7 @@ export default function Insert() {
 
                 {isMutating ? 'Sending...' : <input className="btn btn-sm m-2" type="submit" />}
             </form>
-        </Layout>
+        </>
     )
 }
+Insert.layout = Layout

@@ -9,11 +9,12 @@ import Swal from "sweetalert2";
 
 export default function Post() {
     return (
-        <Layout>
+        <>
             <LoadData/>
-        </Layout>
+        </>
     )
 }
+Post.layout = Layout
 
 function LoadData(){
     const router = useRouter()
