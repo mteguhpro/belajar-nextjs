@@ -4,6 +4,7 @@ import useSWR from 'swr'
 import instanceAxios from '../../axios/instance';
 import Layout from '../../components/layout';
 import TableInstant from '../../components/TableInstant';
+import Link from "next/link";
 
 export default function Users(){
     return (
@@ -27,6 +28,9 @@ function ListData() {
         columnHelper.accessor('email'),
         columnHelper.accessor('phone'),
         columnHelper.accessor('gender'),
+        columnHelper.accessor('aksi',{
+            cell: info => <Link href={"/users/"+info.row.original.id} className="btn btn-sm btn-primary">Detail</Link>,
+        }),
     ], [])
 
     const [{ pageIndex, pageSize }, setPagination] = useState({
