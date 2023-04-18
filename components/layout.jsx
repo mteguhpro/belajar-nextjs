@@ -74,13 +74,14 @@ function SidebarMenu() {
 
 
 export default function Layout({ children }) {
-    const { isActive, toggle } = useSidebarStore((state) => state)
+    const { isActive, toggle, setActive } = useSidebarStore((state) => state)
     const router = useRouter()
 
     useEffect(function() {
         if(!window.localStorage.getItem("jwtToken")){
             router.push('/login')
         }
+        setActive(window.innerWidth >= 768)
     }, [])
 
     let sidebarClass = 'bg-gray-900 text-slate-50 h-screen overflow-x-auto fixed z-30 w-full '
