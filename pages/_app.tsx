@@ -1,19 +1,29 @@
 import '@/styles/globals.css'
+import { ComponentType, Fragment } from 'react'
+import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
-import { useEffect } from 'react'
-import useSidebarStore from "../zustand/sidebar"
+
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-export default function App({ Component, pageProps }: AppProps) {
-  const setActive = useSidebarStore((state) => state.setActive)
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  layout?: ComponentType
+}
 
-    useEffect(() => {
-      setActive(window.innerWidth >= 768)
-    }, [])
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
+
+export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  // Use the layout defined at the page level, if available
+  const Layout = Component.layout ?? Fragment
 
   return (<>
-    <Component {...pageProps} />
-    <ToastContainer />
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+    <ToastContainer/>
   </>)
 }
+
+//referensi: https://stackoverflow.com/questions/62115518/persistent-layout-in-next-js-with-typescript-and-hoc
