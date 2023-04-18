@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useSidebarStore from "../zustand/sidebar"
 import { useRouter } from "next/router";
 
@@ -77,13 +77,27 @@ export default function Layout({ children }) {
     const { isActive, toggle, setActive } = useSidebarStore((state) => state)
     const router = useRouter()
 
+    const [login, setLogin] = useState(false)
+
     useEffect(function() {
         if(!window.localStorage.getItem("jwtToken")){
             router.push('/login')
+        }else{
+            setLogin(true)
         }
         setActive(window.innerWidth >= 768)
     }, [])
 
+    if(!login){
+        return (
+            <div className="m-2">
+                <h1 className="text-2xl">Belum login</h1>
+                <p>Silahkan login terlebih dahulu</p>
+                <Link href="/login" className="btn btn-sm">Login</Link>
+            </div>
+        )
+    }
+    
     let sidebarClass = 'bg-gray-900 text-slate-50 h-screen overflow-x-auto fixed z-30 w-full '
     sidebarClass += isActive ? 'sm:w-64' : 'sm:w-16 hidden sm:block'
 
