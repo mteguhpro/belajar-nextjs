@@ -1,7 +1,9 @@
+"use client"
+
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import useSidebarStore from "../zustand/sidebar"
-import { useRouter } from "next/router";
+import useSidebarStore from "../../zustand/sidebar"
+import { useRouter } from "next/navigation";
 
 function logout(){
     window.localStorage.removeItem("jwtToken")

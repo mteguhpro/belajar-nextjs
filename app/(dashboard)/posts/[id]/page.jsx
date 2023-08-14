@@ -1,24 +1,16 @@
-import instanceAxios from "../../../axios/instance";
-import { useRouter } from "next/router"
-import Layout from "../../../components/layout"
+"use client"
+
+import instanceAxios from "../../../../axios/instance";
+import { useRouter } from "next/navigation"
 import useSWR from 'swr'
 import useSWRMutation from 'swr/mutation'
 import Link from "next/link";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
-export default function Post() {
-    return (
-        <>
-            <LoadData/>
-        </>
-    )
-}
-Post.layout = Layout
-
-function LoadData(){
+export default function Post({params}){
     const router = useRouter()
-    const { id } = router.query
+    const { id } = params
     const address = 'auth/posts/' + id;
 
     function confirm() {

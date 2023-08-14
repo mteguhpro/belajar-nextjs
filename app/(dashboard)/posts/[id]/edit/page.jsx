@@ -1,14 +1,15 @@
-import Layout from "../../../components/layout";
-import instanceAxios from "../../../axios/instance";
+"use client"
+
+import instanceAxios from "../../../../../axios/instance";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 import useSWRMutation from 'swr/mutation'
 import useSWR from 'swr'
 import { toast } from "react-toastify";
 
-export default function Edit(){
+export default function Edit({params}){
     const router = useRouter()
-    const { id } = router.query
+    const { id } = params
 
     //PUT
     async function sendReq(url, data){
@@ -66,4 +67,3 @@ export default function Edit(){
         </>
     )
 }
-Edit.layout = Layout

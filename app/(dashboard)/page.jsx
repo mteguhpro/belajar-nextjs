@@ -1,5 +1,3 @@
-import Layout from "../components/layout";
-
 export default function Home() {
     return (
         <>
@@ -7,4 +5,3 @@ export default function Home() {
         </>
     )
 }
-Home.layout = Layout

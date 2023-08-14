@@ -1,7 +1,9 @@
-import instanceAxios from "../axios/instance"
+"use client"
+
+import instanceAxios from '../../axios/instance'
 import useSWRMutation from 'swr/mutation'
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { toast } from 'react-toastify';
 

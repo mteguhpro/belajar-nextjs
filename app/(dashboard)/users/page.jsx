@@ -1,21 +1,13 @@
+"use client"
+
 import { createColumnHelper } from '@tanstack/react-table'
 import { useMemo, useState } from 'react'
 import useSWR from 'swr'
-import instanceAxios from '../../axios/instance';
-import Layout from '../../components/layout';
-import TableInstant from '../../components/TableInstant';
+import instanceAxios from '../../../axios/instance';
+import TableInstant from '../../../components/TableInstant';
 import Link from "next/link";
 
-export default function Users(){
-    return (
-        <>
-            <ListData/>
-        </>
-    )
-}
-Users.layout = Layout
-
-function ListData() {
+export default function Users() {
     const columnHelper = createColumnHelper()
     const columns = useMemo(() =>[
         columnHelper.accessor('id'),
@@ -48,7 +40,6 @@ function ListData() {
     }
 
     const dataList = dataGet?.users ? dataGet.users : [];
-
     return <TableInstant
         data={dataList} 
         columns={columns}

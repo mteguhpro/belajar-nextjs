@@ -1,20 +1,10 @@
-import { useRouter } from 'next/router';
+"use client"
+
 import useSWR from 'swr'
-import instanceAxios from '../../../axios/instance';
-import Layout from '../../../components/layout';
+import instanceAxios from '../../../../axios/instance';
 
-export default function Detail() {
-    return (
-        <>
-            <LoadData />
-        </>
-    )
-}
-Detail.layout = Layout
-
-function LoadData() {
-    const router = useRouter()
-    const { id } = router.query
+export default function Detail({params}) {
+    const { id } = params
     const address = 'auth/users/' + id;
     const fetcher = (url) => instanceAxios.get(url).then(res => res.data)
     const { data, error } = useSWR(address, fetcher);

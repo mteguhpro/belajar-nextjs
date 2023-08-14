@@ -1,10 +1,11 @@
+"use client"
+
 import Link from "next/link";
 import { createColumnHelper } from '@tanstack/react-table'
 import { useMemo, useState } from 'react'
 import useSWR from 'swr'
-import instanceAxios from '../../axios/instance';
-import Layout from '../../components/layout';
-import TableInstant from '../../components/TableInstant';
+import instanceAxios from '../../../axios/instance';
+import TableInstant from '../../../components/TableInstant';
 import { useForm } from "react-hook-form";
 
 export default function Posts() {
@@ -17,7 +18,6 @@ export default function Posts() {
         </>
     )
 }
-Posts.layout = Layout
 
 function ListData() {
     const [search, setSearch] = useState('')

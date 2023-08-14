@@ -1,17 +1,13 @@
+"use client"
+
 import { createColumnHelper } from '@tanstack/react-table'
 import { useMemo, useState } from 'react'
 import useSWR from 'swr'
-import instanceAxios from '../../axios/instance';
-import Layout from '../../components/layout';
-import TableInstant from '../../components/TableInstant';
+import instanceAxios from '../../../axios/instance';
+import TableInstant from '../../../components/TableInstant';
 import Select from 'react-select';
 
 export default function Products() {
-    return <ListData/>
-}
-Products.layout = Layout
-
-function ListData() {
     const [category, setCategory] = useState('')
     const columnHelper = createColumnHelper()
     const columns = useMemo(() =>[
@@ -52,7 +48,7 @@ function ListData() {
 
     const dataList = dataGet?.products ? dataGet.products : [];
 
-    return<>
+    return <>
         <form className="w-full">
             <div className="form-control sm:w-64">
                 {dataSelect ? <Select isClearable onChange={(data)=>setCategory(data?.value)} options={optionSelect} className="z-[12]"/> : 'Loading...'}
