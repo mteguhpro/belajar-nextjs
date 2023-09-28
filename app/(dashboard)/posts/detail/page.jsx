@@ -1,16 +1,17 @@
 "use client"
 
 import instanceAxios from "../../../../axios/instance";
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import useSWR from 'swr'
 import useSWRMutation from 'swr/mutation'
 import Link from "next/link";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
-export default function Post({params}){
+export default function Post(){
+    const searchParams = useSearchParams()
+    const id = searchParams.get('id')
     const router = useRouter()
-    const { id } = params
     const address = 'auth/posts/' + id;
 
     function confirm() {
@@ -55,7 +56,10 @@ export default function Post({params}){
     return <>
         <h1 className="text-2xl font-bold leading-7 text-gray-900">{data.title}</h1>
         <p className="my-5">{data.body}</p>
-        <Link className="btn btn-sm btn-warning mx-1" href={data.id+'/edit'}>Edit</Link>
+        <Link className="btn btn-sm btn-warning mx-1" href={{
+                pathname : 'edit',
+                query : {id:data.id},
+            }}>Edit</Link>
         {isMutating ? 'deleting...' : <button className="btn btn-sm btn-error mx-1" 
         onClick={confirm}>Delete</button>}
     </>

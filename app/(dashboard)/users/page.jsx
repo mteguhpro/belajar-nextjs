@@ -22,7 +22,10 @@ export default function Users() {
         columnHelper.accessor('phone'),
         columnHelper.accessor('gender'),
         columnHelper.accessor('aksi',{
-            cell: info => <Link href={"/users/"+info.row.original.id} className="btn btn-sm btn-primary">Detail</Link>,
+            cell: info => <Link href={{
+                pathname : "/users/detail",
+                query : {id : info.row.original.id},
+            }} className="btn btn-sm btn-primary">Detail</Link>,
         }),
     ], [])
 

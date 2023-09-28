@@ -25,7 +25,10 @@ function ListData() {
     const columns = useMemo(() =>[
         columnHelper.accessor('id'),
         columnHelper.accessor('title',{
-            cell: info => <Link href={"/posts/"+info.row.original.id} className="link">{info.getValue()}</Link>,
+            cell: info => <Link href={{
+                pathname : "/posts/detail",
+                query : {id : info.row.original.id},
+            }} className="link">{info.getValue()}</Link>,
         }),
     ], [])
 

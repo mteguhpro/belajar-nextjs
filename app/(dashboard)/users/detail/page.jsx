@@ -1,10 +1,12 @@
 "use client"
 
 import useSWR from 'swr'
-import instanceAxios from '../../../../axios/instance';
+import instanceAxios from '../../../../axios/instance'
+import { useSearchParams } from 'next/navigation'
 
-export default function Detail({params}) {
-    const { id } = params
+export default function Detail() {
+    const searchParams = useSearchParams()
+    const id = searchParams.get('id')
     const address = 'auth/users/' + id;
     const fetcher = (url) => instanceAxios.get(url).then(res => res.data)
     const { data, error } = useSWR(address, fetcher);

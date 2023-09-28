@@ -2,14 +2,15 @@
 
 import instanceAxios from "../../../../../axios/instance";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import useSWRMutation from 'swr/mutation'
 import useSWR from 'swr'
 import { toast } from "react-toastify";
 
-export default function Edit({params}){
+export default function Edit(){
+    const searchParams = useSearchParams()
+    const id = searchParams.get('id')
     const router = useRouter()
-    const { id } = params
 
     //PUT
     async function sendReq(url, data){
@@ -17,7 +18,7 @@ export default function Edit({params}){
         console.log(url, data)
         if(post?.title){
             toast.success('sukses mengupdate '+post?.title)
-            router.push('/posts/'+id)
+            router.push('/posts/detail?id='+id)
         }
     }
     const urlPut = 'auth/posts/'+id;
