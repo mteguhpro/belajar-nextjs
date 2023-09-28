@@ -1,6 +1,6 @@
 "use client"
 
-import instanceAxios from "../../../../../axios/instance";
+import instanceAxios from "@/axios/instance";
 import { useForm } from "react-hook-form";
 import { useRouter, useSearchParams } from "next/navigation"
 import useSWRMutation from 'swr/mutation'

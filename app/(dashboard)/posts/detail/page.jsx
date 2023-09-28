@@ -1,6 +1,6 @@
 "use client"
 
-import instanceAxios from "../../../../axios/instance";
+import instanceAxios from "@/axios/instance";
 import { useRouter, useSearchParams } from "next/navigation"
 import useSWR from 'swr'
 import useSWRMutation from 'swr/mutation'

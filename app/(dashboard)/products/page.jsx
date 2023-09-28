@@ -3,8 +3,8 @@
 import { createColumnHelper } from '@tanstack/react-table'
 import { useMemo, useState } from 'react'
 import useSWR from 'swr'
-import instanceAxios from '../../../axios/instance';
-import TableInstant from '../../../components/TableInstant';
+import instanceAxios from '@/axios/instance';
+import TableInstant from '@/components/TableInstant';
 import Select from 'react-select';
 
 export default function Products() {

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import useSidebarStore from "../../zustand/sidebar"
+import useSidebarStore from "@/zustand/sidebar"
 import { useRouter } from "next/navigation";
 
 function logout(){

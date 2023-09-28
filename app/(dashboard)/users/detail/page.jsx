@@ -1,7 +1,7 @@
 "use client"
 
 import useSWR from 'swr'
-import instanceAxios from '../../../../axios/instance'
+import instanceAxios from '@/axios/instance'
 import { useSearchParams } from 'next/navigation'
 
 export default function Detail() {
