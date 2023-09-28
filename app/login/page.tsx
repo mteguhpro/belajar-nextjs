@@ -7,6 +7,11 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { toast } from 'react-toastify';
 
+type FormValues = {
+    username: string;
+    password: string;
+};
+
 export default function Login() {
     const router = useRouter()
 
@@ -16,7 +21,7 @@ export default function Login() {
         }
     }, [])
     //POST
-    async function sendReq(url, data) {
+    async function sendReq(url:string, data:{ arg: string }) {
         const post = await instanceAxios.post(url, data?.arg).then(res => res.data)
             .catch(function (err) {
                 toast.error('Error ' + err.response.status + ' | ' + err.response.data.message)
@@ -32,9 +37,9 @@ export default function Login() {
     const address = 'auth/login';
     const { trigger, isMutating } = useSWRMutation(address, sendReq)
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
 
-    const onSubmit = data => trigger(data)
+    const onSubmit = (data:any) => trigger(data)
 
     return (
         <div className="flex flex-row justify-center p-2">
