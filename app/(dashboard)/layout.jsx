@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 function logout(){
     window.localStorage.removeItem("jwtToken")
-    window.location.href = '/login'
+    window.location.href = '/login/'
 }
 
 function Navbar() {
