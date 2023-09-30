@@ -18,7 +18,7 @@ export default function Edit(){
         console.log(url, data)
         if(post?.title){
             toast.success('sukses mengupdate '+post?.title)
-            router.push('/posts/detail?id='+id)
+            router.push('/posts/detail/?id='+id)
         }
     }
     const urlPut = 'auth/posts/'+id;
