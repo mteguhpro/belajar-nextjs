@@ -57,7 +57,7 @@ export default function Post(){
         <h1 className="text-2xl font-bold leading-7 text-gray-900">{data.title}</h1>
         <p className="my-5">{data.body}</p>
         <Link className="btn btn-sm btn-warning mx-1" href={{
-                pathname : 'edit',
+                pathname : 'edit/',
                 query : {id:data.id},
             }}>Edit</Link>
         {isMutating ? 'deleting...' : <button className="btn btn-sm btn-error mx-1" 
